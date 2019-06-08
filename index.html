@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>CHUH-RAINS, BOEH</title>
+  </head>
+
+  <body>
+      <header class="header">
+        <div class="jumbotron">
+            <h1 class="display-4">T-Rainz</h1>
+            <h3 class="display-6">Choo choo, motha fucka</h3>
+        </div>
+    </header>
+    <section class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6>Current Train Schedule</h6>
+                </div>
+                <div class=“card-body”>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Train Name</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">Frequency (min)</th>
+                            <th scope="col">Next Arrival</th>
+                            <th scope="col">Minutes Away</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                            <!-- <tr id>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            </tr>
+                            <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                            </tr>
+                            <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                            </tr> -->
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        </div>
+            <div class="row">
+                <div class = "col-md-12 d-flex justify-content-center">
+            <div class="card mb-4">
+                    <div class="card-header">
+                        <h6>Add Employee</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">Train Name</span>
+                                </div>
+                                <input type="text" class="form-control" id="name-input" aria-describedby="basic-addon3">
+                            </div>
+                        
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">Destination</span>
+                                </div>
+                                <input type="text" class="form-control" id="destination-input" aria-describedby="basic-addon3">
+                            </div>
+                        
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">First Train Time(HH:mm-Military time)</span>
+                                </div>
+                                <input type="text" class="form-control" id="train-time-input" aria-describedby="basic-addon3">
+                            </div>
+                        
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">Frequency</span>
+                                </div>
+                                <input type="text" class="form-control" id="frequency-input" aria-describedby="basic-addon3">
+                            </div>                    </div>
+
+                            <button type="button" id = "submit" class="btn btn-primary btn-sm float-right">Submit</button>
+    
+                        </div>
+                    </div>
+            </div>
+</section>
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+
+    <!-- LINK TO FIREBASE GOES HERE -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-database.js"></script>
+    <!-- Our Code -->
+    <script>
+    // Initialize Firebase
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+    apiKey: "AIzaSyA1ia2WxyfzXzQ6I8JT4eHGfoT_Eo9CdBE",
+    authDomain: "uo-bootcamp-demo.firebaseapp.com",
+    databaseURL: "https://uo-bootcamp-demo.firebaseio.com",
+    projectId: "uo-bootcamp-demo",
+    storageBucket: "uo-bootcamp-demo.appspot.com",
+    messagingSenderId: "866740216167",
+    appId: "1:866740216167:web:04d87174d9c94ef7"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Create a variable to reference the database
+    var database = firebase.database();
+
+    var name = "";
+    var destination = "";
+    var startTime = "";
+    var frequency = "";
+
+
+
+    var now = moment();
+    // var someDate = moment("02/14/1980", format here);
+    // var newDate = moment("02/14/2001", format here);
+    // console.log(someDate.diff(newDate, "months"));
+
+
+    console.log(now.diff("01/01/0101", "months"));
+
+    // Capture Button Click
+    $("#submit").on("click", function(event) {
+      event.preventDefault();
+      // Grabbed values from text boxes
+      name = $("#name-input").val().trim();
+      destination = $("#destination-input").val().trim();
+      startTime = moment($("#train-time-input").val().trim(), 'HH:mm').format('hh:mm a');
+      frequency = $("#frequency-input").val().trim();
+
+
+
+      // Code for handling the push
+      database.ref().push({
+        name: name,
+        destination: destination,
+        startTime: startTime,
+        frequency: frequency,
+
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+      });
+    });
+    // Firebase watcher .on("child_added"
+    database.ref().on("child_added", function(snapshot) {
+      // storing the snapshot.val() in a variable for convenience
+      var sv = snapshot.val();
+      // Console.loging the last user's data
+      console.log(sv.name);
+      console.log(sv.destination);
+    //   console.log(sv.firstTime);
+      console.log(sv.startTime);
+      console.log(sv.frequency);
+      // Change the HTML to reflect
+        var row = $("<tr>");
+        var rowName = $("<td>");
+        var rowDestination = $("<td>");
+        var rowStartTime = $("<td>");
+        // var rowFirstTime = $("<td>");
+        var rowFrequency = $("<td>");
+        
+        rowName.text(sv.name);
+        rowDestination.text(sv.destination);
+        rowStartTime.text(sv.startTime);
+        rowFrequency.text(sv.frequency);
+
+        row.append(rowName,rowDestination, rowFrequency, rowStartTime);
+        $("#table-body").append(row);
+
+      // Handle the errors
+    }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+    });
+
+
+    </script>
+</body>
+</html>
