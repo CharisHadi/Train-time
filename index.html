@@ -138,7 +138,7 @@
     var destination = "";
     var startTime = "";
     var frequency = "";
-
+    var minutesAway = "";
 
 
     var now = moment();
@@ -157,6 +157,7 @@
       destination = $("#destination-input").val().trim();
       startTime = moment($("#train-time-input").val().trim(), 'HH:mm').format('hh:mm a');
       frequency = $("#frequency-input").val().trim();
+      minutesAway = moment().to(startTime);
 
 
 
@@ -166,6 +167,7 @@
         destination: destination,
         startTime: startTime,
         frequency: frequency,
+        minutesAway: minutesAway,
 
         dateAdded: firebase.database.ServerValue.TIMESTAMP
       });
@@ -185,15 +187,16 @@
         var rowName = $("<td>");
         var rowDestination = $("<td>");
         var rowStartTime = $("<td>");
-        // var rowFirstTime = $("<td>");
+        var rowMinutesAway = $("<td>");
         var rowFrequency = $("<td>");
         
         rowName.text(sv.name);
         rowDestination.text(sv.destination);
         rowStartTime.text(sv.startTime);
         rowFrequency.text(sv.frequency);
+        rowMinutesAway.text(sv.minutesAway);
 
-        row.append(rowName,rowDestination, rowFrequency, rowStartTime);
+        row.append(rowName,rowDestination, rowFrequency, rowStartTime, rowMinutesAway);
         $("#table-body").append(row);
 
       // Handle the errors
